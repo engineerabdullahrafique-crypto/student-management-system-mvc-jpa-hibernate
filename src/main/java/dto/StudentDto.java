@@ -1,11 +1,12 @@
-package entity;
+package dto;
 
+import entity.Course;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
-public class Student {
+public class StudentDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -18,31 +19,16 @@ public class Student {
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id")
     )
-    private List<Course> courseList;
+    private List<CourseDto> courseDtoList;
 
-    public Student() {
+    public StudentDto() {
     }
 
-    public Student(String name, int age, String gender, List<Course> courseList) {
-        this.name = name;
+    public StudentDto(int age, List<CourseDto> courseDtoList, String gender, String name) {
         this.age = age;
+        this.courseDtoList = courseDtoList;
         this.gender = gender;
-        this.courseList = courseList;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    /*public void setId(int id) {
-        this.id = id;
-    }*/
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+//        this.id = id;
         this.name = name;
     }
 
@@ -54,6 +40,14 @@ public class Student {
         this.age = age;
     }
 
+    public List<CourseDto> getCourseDtoList() {
+        return courseDtoList;
+    }
+
+    public void setCourseDtoList(List<CourseDto> courseDtoList) {
+        this.courseDtoList = courseDtoList;
+    }
+
     public String getGender() {
         return gender;
     }
@@ -62,20 +56,28 @@ public class Student {
         this.gender = gender;
     }
 
-    public List<Course> getCourseList() {
-        return courseList;
+    public int getId() {
+        return id;
     }
 
-    public void setCourseList(List<Course> courseList) {
-        this.courseList = courseList;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
-        return "Student{" +
-                "id=" + id +
+        return "StudentDto{" +
+                "age=" + age +
+                ", id=" + id +
                 ", name='" + name + '\'' +
-                ", age=" + age +
                 ", gender='" + gender + '\'' +
                 '}';
     }

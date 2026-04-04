@@ -1,16 +1,22 @@
 package entity;
 
+import jakarta.persistence.*;
+
 import java.util.List;
 
+@Entity
 public class Course {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    @ManyToMany(mappedBy = "courseList")
     private List<Student> students;
 
-    public Course() {}
+    public Course() {
+    }
 
-    public Course(int id, String name, List<Student> students) {
-        this.id = id;
+    public Course(String name, List<Student> students) {
         this.name = name;
         this.students = students;
     }
@@ -19,9 +25,9 @@ public class Course {
         return id;
     }
 
-    public void setId(int id) {
+    /*public void setId(int id) {
         this.id = id;
-    }
+    }*/
 
     public String getName() {
         return name;
@@ -44,7 +50,6 @@ public class Course {
         return "Course{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", students=" + students +
                 '}';
     }
 }
