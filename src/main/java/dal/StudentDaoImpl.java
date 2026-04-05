@@ -68,7 +68,7 @@ public class StudentDaoImpl implements StudentDao {
             return;
         }
 
-        // 🔥 Add relationship
+        // relationship
         student.getCourseList().add(course);
         course.getStudents().add(student);
         tx.commit();

@@ -9,8 +9,11 @@ import entity.Course;
 import entity.Student;
 import exceptions.CourseNotFoundException;
 import exceptions.StudentNotFoundException;
+import utils.StudentSorting;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class StudentServiceImpl implements StudentService {
@@ -58,6 +61,7 @@ public class StudentServiceImpl implements StudentService {
             studentDto.setAge(s.getAge());
             studentDto.setGender(s.getGender());
             studentDtos.add(studentDto);
+            Collections.sort(studentDtos, new StudentSorting());
         }
         return studentDtos;
     }
