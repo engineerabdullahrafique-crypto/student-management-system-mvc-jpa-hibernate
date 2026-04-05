@@ -1,17 +1,10 @@
 package dto;
 
-import entity.Student;
-import jakarta.persistence.*;
-
 import java.util.List;
 
-@Entity
 public class CourseDto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    @ManyToMany(mappedBy = "courseDtoList")
     private List<StudentDto> studentDtos;
 
     public CourseDto() {

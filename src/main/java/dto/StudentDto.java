@@ -1,24 +1,13 @@
 package dto;
 
-import entity.Course;
-import jakarta.persistence.*;
-
 import java.util.List;
 
-@Entity
 public class StudentDto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int id;
     private String name;
     private int age;
     private String gender;
-    @ManyToMany
-    @JoinTable(
-            name = "student_course",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id")
-    )
     private List<CourseDto> courseDtoList;
 
     public StudentDto() {
