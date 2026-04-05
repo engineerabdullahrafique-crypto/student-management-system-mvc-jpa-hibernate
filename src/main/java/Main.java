@@ -1,5 +1,6 @@
 import controller.CourseController;
 import controller.StudentController;
+import utils.InputValidation;
 
 import java.util.Scanner;
 
@@ -25,9 +26,11 @@ public class Main {
             System.out.println("9. Add Student In Course");
             System.out.println("0. Exit");
 
-            System.out.print("Enter choice: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+//            System.out.print("Enter choice: ");
+//            int choice = scanner.nextInt();
+//            scanner.nextLine();
+            int choice = InputValidation.getValidInt("Enter choice: ");
+
 
             switch (choice) {
 

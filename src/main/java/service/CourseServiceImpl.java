@@ -4,6 +4,7 @@ import dal.CourseDaoImpl;
 import dao.CourseDao;
 import dto.CourseDto;
 import entity.Course;
+import exceptions.CourseNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +20,10 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public CourseDto viewCourseById(int id) {
+    public CourseDto viewCourseById(int id) throws CourseNotFoundException {
         Course course = courseDao.getCourse(id);
         if (course == null) {
-            System.out.println("Course not found");
-            return null;
+            throw new CourseNotFoundException("Course With ID: " + id + " Not Found");
         }
         CourseDto courseDto = new CourseDto();
         courseDto.setId(course.getId());
@@ -32,11 +32,10 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<CourseDto> viewAllCourses() {
+    public List<CourseDto> viewAllCourses() throws CourseNotFoundException {
         List<Course> course = courseDao.getCourses();
         if (course == null) {
-            System.out.println("Course not found");
-            return new ArrayList<>();
+            throw new CourseNotFoundException("No Courses Found");
         }
         List<CourseDto> courseDtos = new ArrayList<>();
         for (Course c : course) {

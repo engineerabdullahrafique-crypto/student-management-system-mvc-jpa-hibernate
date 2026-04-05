@@ -2,8 +2,10 @@ package controller;
 
 import dto.CourseDto;
 import entity.Course;
+import exceptions.CourseNotFoundException;
 import service.CourseService;
 import service.CourseServiceImpl;
+import utils.InputValidation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +26,15 @@ public class CourseController {
     }
 
     public void viewCourseById() {
-        System.out.println("Enter Id: ");
-        int id = scanner.nextInt();
-        CourseDto courseDto = courseService.viewCourseById(id);
+        /*System.out.println("Enter Id: ");
+        int id = scanner.nextInt();*/
+        int id = InputValidation.getValidInt("Enter course id: ");
+        CourseDto courseDto = null;
+        try {
+            courseDto = courseService.viewCourseById(id);
+        } catch (CourseNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
         if (courseDto == null) {
             System.out.println("Course not found");
             return;
@@ -36,11 +44,17 @@ public class CourseController {
     }
 
     public void viewAllCourses() {
-        List<CourseDto> courseDto = courseService.viewAllCourses();
-        if (courseDto == null) {
-            System.out.println("No courses found");
-            return;
+        List<CourseDto> courseDto = null;
+        try {
+            courseDto = courseService.viewAllCourses();
+        } catch (CourseNotFoundException e) {
+            System.out.println(e.getMessage());
         }
+
+//        if (courseDto == null) {
+//            System.out.println("No courses found");
+//            return;
+//        }
         for (CourseDto courseDto1 : courseDto) {
             System.out.println("Course id: " + courseDto1.getId());
             System.out.println("Course name: " + courseDto1.getName());

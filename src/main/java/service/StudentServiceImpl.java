@@ -7,6 +7,8 @@ import dao.StudentDao;
 import dto.StudentDto;
 import entity.Course;
 import entity.Student;
+import exceptions.CourseNotFoundException;
+import exceptions.StudentNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +27,10 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void updateStudent(int id, StudentDto studentDto) {
+    public void updateStudent(int id, StudentDto studentDto) throws StudentNotFoundException {
         Student student = studentDao.getStudent(id);
         if (student == null) {
-            return;
+            throw new StudentNotFoundException("Student With ID: " + id + " Not Found");
         }
         student.setName(studentDto.getName());
         student.setAge(studentDto.getAge());
@@ -37,7 +39,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void deleteStudent(int id) {
+    public void deleteStudent(int id) throws StudentNotFoundException {
+        Student student = studentDao.getStudent(id);
+        if (student == null) {
+            throw new StudentNotFoundException("Student With ID: " + id + " Not Found");
+        }
         studentDao.delete(id);
     }
 
@@ -57,10 +63,10 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentDto getStudentById(int id) {
+    public StudentDto getStudentById(int id) throws StudentNotFoundException {
         Student student = studentDao.getStudent(id);
         if (student == null) {
-            return null;
+            throw new StudentNotFoundException("Student With ID: " + id + " Not Found");
         }
         StudentDto studentDto = new StudentDto();
         studentDto.setId(student.getId());
@@ -71,10 +77,20 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void enrollStudentInCourse(int stdId, int courseId) {
+    public void enrollStudentInCourse(int stdId, int courseId) throws StudentNotFoundException, CourseNotFoundException {
+
+        Student student = studentDao.getStudent(stdId);
+        Course course = courseDao.getCourse(courseId);
+
+        if (student == null) {
+            throw new StudentNotFoundException("Student with ID " + stdId + " not found");
+        }
+
+        if (course == null) {
+            throw new CourseNotFoundException("Course with ID " + courseId + " not found");
+        }
 
         studentDao.addStudentInCourse(stdId, courseId);
-
         System.out.println("Student enrolled successfully!");
     }
 }
