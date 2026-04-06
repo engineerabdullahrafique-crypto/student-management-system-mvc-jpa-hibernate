@@ -4,6 +4,7 @@ import dal.CourseDaoImpl;
 import dal.StudentDaoImpl;
 import dao.CourseDao;
 import dao.StudentDao;
+import dto.CourseDto;
 import dto.StudentDto;
 import entity.Course;
 import entity.Student;
@@ -96,5 +97,33 @@ public class StudentServiceImpl implements StudentService {
 
         studentDao.addStudentInCourse(stdId, courseId);
         System.out.println("Student enrolled successfully!");
+    }
+
+    @Override
+    public List<StudentDto> viewForStudentAndCourse() throws StudentNotFoundException, CourseNotFoundException {
+
+        List<Student> studentList = studentDao.getStudents();
+        List<StudentDto> studentDtoList = new ArrayList<>();
+
+        for (Student student : studentList) {
+            StudentDto studentDto = new StudentDto();
+            studentDto.setId(student.getId());
+            studentDto.setName(student.getName());
+            studentDto.setAge(student.getAge());
+            studentDto.setGender(student.getGender());
+
+            List<CourseDto> courseDtoList = new ArrayList<>();
+            if(student.getCourseList()!=null){
+                for(Course course: student.getCourseList()){
+                    CourseDto courseDto = new CourseDto();
+                    courseDto.setId(course.getId());
+                    courseDto.setName(course.getName());
+                    courseDtoList.add(courseDto);
+                }
+            }
+            studentDto.setCourseDtoList(courseDtoList);
+            studentDtoList.add(studentDto);
+        }
+        return studentDtoList;
     }
 }

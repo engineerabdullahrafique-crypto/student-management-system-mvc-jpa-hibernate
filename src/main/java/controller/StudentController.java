@@ -169,4 +169,27 @@ public class StudentController {
             System.out.println(e.getMessage());
         }
     }
+
+    public void viewEnrolledStudentWithCourses() {
+        System.out.println("All Student With Their Enrolled Courses");
+        try {
+            List<StudentDto> studentDtos = studentService.viewForStudentAndCourse();
+            for (StudentDto studentDto : studentDtos) {
+                System.out.println("\n---Student Info---");
+                System.out.println("ID: " + studentDto.getId() + "," + " " + " Name: " + studentDto.getName() + "," + " " + studentDto.getGender());
+                if (studentDto.getCourseDtoList().isEmpty()) {
+                    System.out.println("Courses none");
+                } else {
+                    System.out.println("Courses");
+                    for (CourseDto courseDto : studentDto.getCourseDtoList()) {
+                        System.out.println("Course ID: " + courseDto.getId() + "," + " " + "Course Name: " + courseDto.getName());
+                    }
+                }
+            }
+        } catch (StudentNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (CourseNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

@@ -21,6 +21,6 @@ public interface StudentService {
 
     void enrollStudentInCourse(int stdId, int courseId) throws StudentNotFoundException, CourseNotFoundException;
 
-    List<CourseDto,StudentDto> viewForStudentAndCourse() throws StudentNotFoundException, CourseNotFoundException;
+    List<StudentDto> viewForStudentAndCourse() throws StudentNotFoundException, CourseNotFoundException;
 
 }

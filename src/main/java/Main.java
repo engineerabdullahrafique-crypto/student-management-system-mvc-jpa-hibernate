@@ -24,6 +24,7 @@ public class Main {
             System.out.println("7. View Course By ID");
             System.out.println("8. View All Courses");
             System.out.println("9. Add Student In Course");
+            System.out.println("10. All Student With Their Enrolled Courses");
             System.out.println("0. Exit");
 
 //            System.out.print("Enter choice: ");
@@ -68,6 +69,9 @@ public class Main {
 
                 case 9:
                     studentController.addInCourse();
+                    break;
+                case 10:
+                    studentController.viewEnrolledStudentWithCourses();
                     break;
 
                 case 0:

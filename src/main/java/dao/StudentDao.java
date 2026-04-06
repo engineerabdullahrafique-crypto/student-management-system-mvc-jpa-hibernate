@@ -1,6 +1,5 @@
 package dao;
 
-import entity.Course;
 import entity.Student;
 
 import java.util.List;
@@ -12,5 +11,4 @@ public interface StudentDao {
     Student getStudent(int id);
     List<Student> getStudents();
     void addStudentInCourse(int studentId, int courseId);
-    void createViewWithStudentAndCourse();
 }
