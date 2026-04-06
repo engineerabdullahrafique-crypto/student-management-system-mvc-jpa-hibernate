@@ -1,5 +1,6 @@
 package service;
 
+import dto.CourseDto;
 import dto.StudentDto;
 import entity.Student;
 import exceptions.CourseNotFoundException;
@@ -19,5 +20,7 @@ public interface StudentService {
     StudentDto getStudentById(int id) throws StudentNotFoundException;
 
     void enrollStudentInCourse(int stdId, int courseId) throws StudentNotFoundException, CourseNotFoundException;
+
+    List<CourseDto,StudentDto> viewForStudentAndCourse() throws StudentNotFoundException, CourseNotFoundException;
 
 }

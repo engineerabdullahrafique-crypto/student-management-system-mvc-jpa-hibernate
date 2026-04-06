@@ -12,4 +12,5 @@ public interface StudentDao {
     Student getStudent(int id);
     List<Student> getStudents();
     void addStudentInCourse(int studentId, int courseId);
+    void createViewWithStudentAndCourse();
 }
