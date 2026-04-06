@@ -134,8 +134,9 @@ public class StudentController {
     }
 
     public void addInCourse() {
-        System.out.println("Enter student id which you want to add in course: ");
-        int id = scanner.nextInt();
+//        System.out.println("Enter student id which you want to add in course: ");
+//        int id = scanner.nextInt();
+        int id = InputValidation.getValidInt("Enter student id which you want to add in course: ");
         StudentDto student = null;
         try {
             student = studentService.getStudentById(id);
