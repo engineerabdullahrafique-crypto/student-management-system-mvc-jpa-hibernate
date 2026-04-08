@@ -1,19 +1,22 @@
 package dto;
 
+import enums.Gender;
+
 import java.util.List;
 
 public class StudentDto {
 
-    private int id;
+    private Long id;
     private String name;
-    private int age;
-    private String gender;
+    private Integer age;
+    //    private String gender;
+    private Gender gender;
     private List<CourseDto> courseDtoList;
 
     public StudentDto() {
     }
 
-    public StudentDto(int age, List<CourseDto> courseDtoList, String gender, String name) {
+    public StudentDto(Integer age, List<CourseDto> courseDtoList, Gender gender, String name) {
         this.age = age;
         this.courseDtoList = courseDtoList;
         this.gender = gender;
@@ -25,7 +28,7 @@ public class StudentDto {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -37,19 +40,19 @@ public class StudentDto {
         this.courseDtoList = courseDtoList;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

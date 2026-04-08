@@ -9,7 +9,7 @@ import java.util.List;
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String name;
     @ManyToMany(mappedBy = "courseList")
     private List<Student> students;
@@ -22,7 +22,7 @@ public class Course {
         this.students = students;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 

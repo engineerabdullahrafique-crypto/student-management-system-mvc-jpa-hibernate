@@ -2,6 +2,7 @@ package controller;
 
 import dto.CourseDto;
 import dto.StudentDto;
+import enums.Gender;
 import exceptions.CourseNotFoundException;
 import exceptions.StudentNotFoundException;
 import service.CourseService;
@@ -24,8 +25,19 @@ public class StudentController {
         /*System.out.println("Enter student age: ");
         scanner.nextLine();*/
         int age = InputValidation.getValidInt("Enter student age: ");
-        System.out.println("Enter student gender: ");
-        String gender = scanner.nextLine();
+//        System.out.println("Enter student gender (MALE/FEMALE/OTHER): ");
+//        String gender = scanner.nextLine();
+//        Gender genderSelection = Gender.valueOf(gender.trim().toUpperCase());
+        Gender gender = null;
+        while (gender == null) {
+            try {
+                System.out.println("Enter student gender (MALE/FEMALE/OTHER): ");
+                String input = scanner.nextLine();
+                gender = Gender.valueOf(input.trim().toUpperCase());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid gender! Try again.");
+            }
+        }
         StudentDto studentDto = new StudentDto();
         studentDto.setName(name);
         studentDto.setAge(age);
@@ -56,8 +68,19 @@ public class StudentController {
         int age = scanner.nextInt();
         scanner.nextLine();
         System.out.println("Current gender: " + studentDto.getGender());
-        System.out.println("Enter student gender: ");
-        String gender = scanner.nextLine();
+//        System.out.println("Enter student gender: ");
+//        String gender = scanner.nextLine();
+//        Gender genderSelection = Gender.valueOf(gender.trim().toUpperCase());
+        Gender gender = null;
+        while (gender == null) {
+            try {
+                System.out.println("Enter student gender (MALE/FEMALE/OTHER): ");
+                String input = scanner.nextLine();
+                gender = Gender.valueOf(input.trim().toUpperCase());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid gender! Try again.");
+            }
+        }
         studentDto.setName(name);
         studentDto.setAge(age);
         studentDto.setGender(gender);

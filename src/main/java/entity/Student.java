@@ -1,5 +1,6 @@
 package entity;
 
+import enums.Gender;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -9,10 +10,12 @@ import java.util.List;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String name;
-    private int age;
-    private String gender;
+    private Integer age;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+    //    private String gender;
     @ManyToMany
     @JoinTable(
             name = "student_course",
@@ -24,14 +27,14 @@ public class Student {
     public Student() {
     }
 
-    public Student(String name, int age, String gender, List<Course> courseList) {
+    public Student(String name, Integer age, Gender gender, List<Course> courseList) {
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.courseList = courseList;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -47,19 +50,19 @@ public class Student {
         this.name = name;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 

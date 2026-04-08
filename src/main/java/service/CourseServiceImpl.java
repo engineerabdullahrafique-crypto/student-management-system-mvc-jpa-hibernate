@@ -33,15 +33,15 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<CourseDto> viewAllCourses() throws CourseNotFoundException {
-        List<Course> course = courseDao.getCourses();
-        if (course == null) {
+        List<Course> courseList = courseDao.getCourses();
+        if (courseList == null) {
             throw new CourseNotFoundException("No Courses Found");
         }
         List<CourseDto> courseDtos = new ArrayList<>();
-        for (Course c : course) {
+        for (Course course : courseList) {
             CourseDto courseDto = new CourseDto();
-            courseDto.setId(c.getId());
-            courseDto.setName(c.getName());
+            courseDto.setId(course.getId());
+            courseDto.setName(course.getName());
             courseDtos.add(courseDto);
         }
         return courseDtos;
