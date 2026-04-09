@@ -25,6 +25,7 @@ public class Main {
             System.out.println("8. View All Courses");
             System.out.println("9. Add Student In Course");
             System.out.println("10. All Student With Their Enrolled Courses");
+            System.out.println("11. Paginated Student Record");
             System.out.println("0. Exit");
 
 //            System.out.print("Enter choice: ");
@@ -72,6 +73,10 @@ public class Main {
                     break;
                 case 10:
                     studentController.viewEnrolledStudentWithCourses();
+                    break;
+
+                case 11:
+                    studentController.viewStudentsWithPagination();
                     break;
 
                 case 0:

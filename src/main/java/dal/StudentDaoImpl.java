@@ -55,6 +55,17 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
+    public List<Student> getStudentsPaginated(int page, int size) {
+        EntityManager em = JPAUtil.getEntityManager();
+        List<Student> studentList = em.createQuery("from Student ORDER BY id", Student.class)
+                .setFirstResult((page - 1) * size)
+                .setMaxResults(size)
+                .getResultList();
+        em.close();
+        return studentList;
+    }
+
+    @Override
     public void addStudentInCourse(int studentId, int courseId) {
         EntityManager em = JPAUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();

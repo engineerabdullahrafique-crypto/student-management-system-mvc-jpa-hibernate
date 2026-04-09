@@ -68,6 +68,21 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public List<StudentDto> getStudentsPaginated(int page, int size) {
+        List<Student> studentList = studentDao.getStudentsPaginated(page, size);
+        List<StudentDto> studentDtoList = new ArrayList<>();
+        for(Student student: studentList){
+            StudentDto studentDto = new StudentDto();
+            studentDto.setId(student.getId());
+            studentDto.setName(student.getName());
+            studentDto.setAge(student.getAge());
+            studentDto.setGender(student.getGender());
+            studentDtoList.add(studentDto);
+        }
+        return  studentDtoList;
+    }
+
+    @Override
     public StudentDto getStudentById(int id) throws StudentNotFoundException {
         Student student = studentDao.getStudent(id);
         if (student == null) {

@@ -17,6 +17,8 @@ public interface StudentService {
 
     List<StudentDto> getStudents();
 
+    List<StudentDto> getStudentsPaginated(int page, int size);
+
     StudentDto getStudentById(int id) throws StudentNotFoundException;
 
     void enrollStudentInCourse(int stdId, int courseId) throws StudentNotFoundException, CourseNotFoundException;

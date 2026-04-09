@@ -215,4 +215,46 @@ public class StudentController {
             System.out.println(e.getMessage());
         }
     }
+
+    public void viewStudentsWithPagination() {
+
+        int page = 1;
+        int size = 2;
+
+        while (true) {
+
+            List<StudentDto> students = studentService.getStudentsPaginated(page, size);
+
+            if (students.isEmpty()) {
+                System.out.println("No more students.");
+                break;
+            }
+
+            System.out.println("\n--- Page " + page + " ---");
+
+            for (StudentDto s : students) {
+                System.out.println("ID: " + s.getId());
+                System.out.println("Name: " + s.getName());
+                System.out.println("Age: " + s.getAge());
+                System.out.println("Gender: " + s.getGender());
+                System.out.println("----------------------");
+            }
+
+            System.out.println("1. Next Page");
+            System.out.println("2. Previous Page");
+            System.out.println("0. Exit");
+
+            int choice = InputValidation.getValidInt("Enter choice: ");
+
+            if (choice == 1) {
+                page++;
+            } else if (choice == 2 && page > 1) {
+                page--;
+            } else if (choice == 0) {
+                break;
+            } else {
+                System.out.println("Invalid choice");
+            }
+        }
+    }
 }
